@@ -1,6 +1,6 @@
 # Description
 
-This repository is meant to serve as a general template for how to set up new repositories in the JogetOSS organization. 
+This universal datalist inbox works with audit trail plugin to show assignments for all apps that have the audit trail plugin attached.
 
 # Getting Help
 

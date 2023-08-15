@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class entity-name="Assignment" name="org.joget.marketplace.model.Assignment" table="hibernate_assignment">
+        <id column="ActivityProcessId" name="ActivityProcessId" type="string"/>
+        <property column="ActivityId" name="ActivityId" type="string"/>
+        <property column="ResourceId" name="ResourceId" type="string"/>
+        <property column="FormData" name="FormData" type="string" length="1000"/>
+    </class>
+</hibernate-mapping>
