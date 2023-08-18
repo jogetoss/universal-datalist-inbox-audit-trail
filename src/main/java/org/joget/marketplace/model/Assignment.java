@@ -2,10 +2,19 @@ package org.joget.marketplace.model;
 
 public class Assignment {
 
+    private String id;
     private String ActivityProcessId;
     private String ActivityId;
     private String ResourceId;
     private String FormData;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getActivityProcessId() {
         return ActivityProcessId;

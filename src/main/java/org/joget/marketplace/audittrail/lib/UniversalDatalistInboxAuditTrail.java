@@ -101,6 +101,7 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
                     assignment.setResourceId(auditTrail.getUsername());
 
                     final String primaryKey = appService.getOriginProcessId(activity.getProcessId());
+                    assignment.setId(primaryKey);
                     FormData formData = new FormData();
                     Form loadForm = appService.viewDataForm(appDef.getId(), appDef.getVersion().toString(), activityForm.getFormId(), null, null, null, formData, null, null);
                     FormRowSet rowSet = appService.loadFormData(loadForm, primaryKey);
