@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.joget.marketplace.audittrail.lib.UniversalDatalistInboxAuditTrail;
-import org.joget.marketplace.userviewmenu.lib.UniversalDatalistInboxMenu;
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
@@ -18,7 +17,6 @@ public class Activator implements BundleActivator {
 
         //Register plugin here
         registrationList.add(context.registerService(UniversalDatalistInboxAuditTrail.class.getName(), new UniversalDatalistInboxAuditTrail(), null));
-        registrationList.add(context.registerService(UniversalDatalistInboxMenu.class.getName(), new UniversalDatalistInboxMenu(), null));
     }
 
     public void stop(BundleContext context) {
