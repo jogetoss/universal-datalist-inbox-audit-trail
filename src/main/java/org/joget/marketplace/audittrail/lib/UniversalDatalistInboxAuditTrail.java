@@ -116,9 +116,11 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
                 WorkflowManager workflowManager = (WorkflowManager) AppUtil.getApplicationContext().getBean("workflowManager");
                 String actId = auditTrail.getMessage();
                 WorkflowActivity activity = workflowManager.getActivityById(actId);
+                ApplicationContext ac = AppUtil.getApplicationContext();
+                AppService appService = (AppService) ac.getBean("appService");
       
                 if (activity != null && !excluded((String) properties.get("exclusion"), activity)) { 
-                    assignmentdao.deleteAssignment(activity.getProcessId());
+                    assignmentdao.deleteAssignment(appService.getOriginProcessId(activity.getProcessId()));
                 }
             }
         } catch (Exception e) {
