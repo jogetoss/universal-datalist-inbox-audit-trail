@@ -71,7 +71,7 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
     public boolean validation(AuditTrail auditTrail) {
         return auditTrail.getMethod().equals("getDefaultAssignments");
     }
-    
+
     @Override
     public Object execute(Map properties) {
         Object result = null;
@@ -90,7 +90,7 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
                 AppDefinition appDef = appService.getAppDefinitionForWorkflowActivity(actId);
                 PackageActivityForm activityForm = appService.retrieveMappedForm(appDef.getAppId(), appDef.getVersion().toString(), activity.getProcessDefId(), activity.getActivityDefId());
 
-                if (activity != null && !excluded((String) properties.get("exclusion"), activity)) {
+                if (activity != null) {
                     Assignment assignment = new Assignment();
                     assignment.setActivityProcessId(activity.getProcessId());
                     assignment.setActivityId(activity.getId());
@@ -98,12 +98,15 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
 
                     final String primaryKey = appService.getOriginProcessId(activity.getProcessId());
                     assignment.setId(primaryKey);
-                    FormData formData = new FormData();
-                    Form loadForm = appService.viewDataForm(appDef.getId(), appDef.getVersion().toString(), activityForm.getFormId(), null, null, null, formData, null, null);
-                    FormRowSet rowSet = appService.loadFormData(loadForm, primaryKey);
-                    Gson gson = new Gson();
-                    String jsonData = gson.toJson(rowSet);
-                    assignment.setFormData(jsonData);
+
+                    if (activityForm != null && !activityForm.getFormId().equals("")) {
+                        FormData formData = new FormData();
+                        Form loadForm = appService.viewDataForm(appDef.getId(), appDef.getVersion().toString(), activityForm.getFormId(), null, null, null, formData, null, null);
+                        FormRowSet rowSet = appService.loadFormData(loadForm, primaryKey);
+                        Gson gson = new Gson();
+                        String jsonData = gson.toJson(rowSet);
+                        assignment.setFormData(jsonData);
+                    }
                     
                     assignmentdao.deleteAssignment(appService.getOriginProcessId(activity.getProcessId()));
                     assignmentdao.addAssignment(assignment);
@@ -115,13 +118,4 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
         }
         return result;
     }
-
-    protected boolean excluded(String exclusion, WorkflowActivity activity) {
-        Collection<String> exclusionIds = new ArrayList<String>();
-        if (exclusion != null && !exclusion.isEmpty()) {
-            exclusionIds.addAll(Arrays.asList(exclusion.split(";")));
-        }
-        
-        return exclusionIds.contains(WorkflowUtil.getProcessDefIdWithoutVersion(activity.getProcessDefId()) + "-" + activity.getActivityDefId());
-    }   
 }
