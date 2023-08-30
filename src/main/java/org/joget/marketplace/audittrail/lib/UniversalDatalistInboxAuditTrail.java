@@ -71,11 +71,7 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
     public boolean validation(AuditTrail auditTrail) {
         return auditTrail.getMethod().equals("getDefaultAssignments");
     }
-
-    public boolean validation2(AuditTrail auditTrail) {
-        return auditTrail.getMethod().equals("assignmentAccept");
-    }
-   
+    
     @Override
     public Object execute(Map properties) {
         Object result = null;
@@ -109,18 +105,8 @@ public class UniversalDatalistInboxAuditTrail extends DefaultAuditTrailPlugin {
                     String jsonData = gson.toJson(rowSet);
                     assignment.setFormData(jsonData);
                     
-                    assignmentdao.addAssignment(assignment);
-                }
-
-            } else if (validation2(auditTrail)) {
-                WorkflowManager workflowManager = (WorkflowManager) AppUtil.getApplicationContext().getBean("workflowManager");
-                String actId = auditTrail.getMessage();
-                WorkflowActivity activity = workflowManager.getActivityById(actId);
-                ApplicationContext ac = AppUtil.getApplicationContext();
-                AppService appService = (AppService) ac.getBean("appService");
-      
-                if (activity != null && !excluded((String) properties.get("exclusion"), activity)) { 
                     assignmentdao.deleteAssignment(appService.getOriginProcessId(activity.getProcessId()));
+                    assignmentdao.addAssignment(assignment);
                 }
             }
         } catch (Exception e) {
