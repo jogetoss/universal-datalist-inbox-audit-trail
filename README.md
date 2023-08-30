@@ -1,6 +1,6 @@
 # Description
 
-This universal datalist inbox works with audit trail plugin to show assignments for all apps that have the audit trail plugin attached.
+This plugin shows the assignments for all the apps that have the plugin attached.
 
 # Getting Help
 
