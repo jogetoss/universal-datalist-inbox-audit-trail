@@ -2,6 +2,8 @@
 
 This plugin shows the assignments for all the apps that have the plugin attached.
 
+To setup and configure this plugin, please see the [documentation](https://dev.joget.org/community/display/SANDBOX2/Universal+Datalist+Inbox+Audit+Trail).
+
 # Getting Help
 
 JogetOSS is a community-led team for open source software related to the [Joget](https://www.joget.org) no-code/low-code application platform.
