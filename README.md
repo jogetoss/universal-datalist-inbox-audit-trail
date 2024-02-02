@@ -2,7 +2,7 @@
 
 This plugin shows the assignments for all the apps that have the plugin attached.
 
-To setup and configure this plugin, please see the [documentation](https://dev.joget.org/community/display/SANDBOX2/Universal+Datalist+Inbox+Audit+Trail).
+To setup and configure this plugin, please see the [documentation](https://dev.joget.org/community/display/marketplace/Universal+Datalist+Inbox+Audit+Trail).
 
 # Getting Help
 
