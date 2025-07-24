@@ -1,6 +1,6 @@
 package org.joget.marketplace.model;
 
-public class Assignment {
+public class Assignment implements java.io.Serializable{
 
     private String id;
     private String ActivityProcessId;
